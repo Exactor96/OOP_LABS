@@ -15,8 +15,9 @@
 #include <cmath>
 using namespace std;
 class Base{
-    virtual void norm(){};
-    virtual void print(){};
+public:
+    virtual void norm()=0;
+    virtual void print()=0;
 };
 
 class complex: public Base{
@@ -40,11 +41,12 @@ class complex: public Base{
     void setIm(double _im) {im=_im;}
 
     void print(){
+        cout<<"COMPLEX"<<'\n';
         if (im<0) cout<<re<<im<<'i'<<'\n';
         else cout<<re<<'+'<<im<<'i'<<'\n';
     }
     void norm(){
-    	cout<<re*re+im*im<<'\n';
+    	cout<<"NORM: "<<re*re+im*im<<'\n';
 	}
 
 };
@@ -55,13 +57,14 @@ private:
 
 public:
 
-vec(int _v[10]){
-  setV(_v);
-}
-
 vec(){
   int _v[10]={0,0,0,0,0,0,0,0,0,0};
   setV(_v);
+}
+vec(int  _v[]){
+  for (int i = 0; i < 10; i++) {
+    v[i]=_v[i];
+  }
 }
 
 void setV(int _v[10]){
@@ -71,6 +74,7 @@ void setV(int _v[10]){
 }
 
 	void print(){
+    cout<<"VECTOR"<<'\n';
 		for (int each: v){
 			cout<<each<<' ';
 		}
@@ -82,7 +86,7 @@ void setV(int _v[10]){
         for (int each: v){
 			s+=each;
 		}
-        cout<<sqrt(s)<<'\n';
+        cout<<"NORM: "<<sqrt(s)<<'\n';
     }
 
 };
@@ -101,12 +105,21 @@ public:
     }
   }
 
+matrix(int _m[][3]){
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      m[i][j]=_m[i][j];
+    }
+  }
+}
+
 
 	matrix(){
     int _m[3][3]={0,0,0,0,0,0,0,0,0};
 	setM(_m);
 }
 	void print(){
+    cout << "MATRIX" << '\n';
 	    for(int i=0;i<3;i++){
 	        for(int j=0;j<3;j++){
 	            cout<<m[i][j]<<' ';
@@ -123,29 +136,39 @@ public:
 	        }
 
 	    }
-	    cout<<mx<<'\n';
+	    cout<<"NORM: "<<mx<<'\n';
 	}
 
 };
 
 
 int main(){
-	cout<<"COMPLEX"<<'\n';
-    complex c(1,-2);
-    c.print();
-    c.norm();
-    cout<<"vec"<<'\n';
-    vec v1;
-    int l[10]={0,1,2,3,4,5,6,7,8,9};
-    v1.print();
-    v1.setV(l);
-    v1.print();
-    v1.norm();
-	cout<<"MATRIX"<<'\n';
-    matrix m;
-    m.print();
-    int ml[3][3]={1,2,3,4,-55,6,7,8,-9};
-    m.setM(ml);
-    m.print();
-    m.norm();
+	// cout<<"COMPLEX"<<'\n';
+  //   complex c(1,-2);
+  //   c.print();
+  //   c.norm();
+  //   cout<<"vec"<<'\n';
+  //   // vec v1;
+   int l[10]={0,1,2,3,4,5,6,7,8,9};
+  //   //
+  //   // v1.print();
+  //   // v1.setV(l);
+  //   // v1.print();
+  //   // v1.norm();
+  //   vec v1 = vec(l);
+	// cout<<"MATRIX"<<'\n';
+  //   matrix m;
+  //   m.print();
+     int ml[3][3]={1,2,3,4,-55,6,7,8,-9};
+  //   m.setM(ml);
+  //   m.print();
+  //   m.norm();
+
+
+    Base* b[3] = { new complex(1,1),new vec(l),new matrix(ml) };
+    for(int k=0;k<3;k++){
+      b[k]->print();
+      b[k]->norm();
+    }
+  system("pause");
 }
