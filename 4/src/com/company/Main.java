@@ -22,32 +22,65 @@ public class Main {
         p.info();
         Tetrahedron t = new Tetrahedron(4);
         t.info();
-        Person person = new Person();
-        person.setFirstName("Max");
-        person.setLastName("K");
-        person.setAge(23);
-        System.out.println(person);
-        FileOutputStream outputStream = new FileOutputStream("person.ser");
+
+
+        Person [] arr = new Person[3];
+        arr[0] = new Person();
+        arr[1] = new Person();
+        arr[2] = new Person();
+
+        arr[0].setAge(23);
+        arr[1].setAge(25);
+        arr[2].setAge(21);
+
+        arr[0].setFirstName("Max");
+        arr[1].setFirstName("Ivan");
+        arr[2].setFirstName("Kolya");
+
+        arr[0].setLastName("K");
+        arr[1].setLastName("B");
+        arr[2].setLastName("T");
+
+//        for (Person per: arr
+//             ) {
+//            System.out.println(per);
+//
+//        }
+
+
+
+        FileOutputStream outputStream = new FileOutputStream("persons.ser");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
         // сохраняем игру в файл
-        objectOutputStream.writeObject(person);
+        for (Person pr: arr
+             ) {
+            objectOutputStream.writeObject(pr);
+        }
+
 
         //закрываем поток и освобождаем ресурсы
         objectOutputStream.close();
 
-        person=null;
 
-        System.out.println("Person = "+person);
 
-        FileInputStream fileInputStream = new FileInputStream("person.ser");
+
+        FileInputStream fileInputStream = new FileInputStream("persons.ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-        person = (Person) objectInputStream.readObject();
-
-        System.out.println(person);
-
+        Person [] arr1 = new Person[3];
+        int i=0;
+        try {
+            while(true) {
+                arr1[i] = (Person) objectInputStream.readObject();
+                System.out.println(arr1[i]);
+                i++;
+            }
+        }catch (EOFException e){
+            System.out.println("CATCHED: end of the file");
+        }
         objectInputStream.close();
+
 
 
     }

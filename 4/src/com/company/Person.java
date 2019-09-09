@@ -5,7 +5,11 @@ public class Person implements Serializable{
     private String  lastName;
     private int     age;
 
-
+    Person(){
+        firstName=null;
+        lastName=null;
+        age=0;
+    }
     public String getFirstName() {
         return firstName;
     }
