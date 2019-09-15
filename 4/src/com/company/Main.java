@@ -24,38 +24,20 @@ public class Main {
         t.info();
 
 
-        Person [] arr = new Person[3];
-        arr[0] = new Person();
-        arr[1] = new Person();
-        arr[2] = new Person();
-
-        arr[0].setAge(23);
-        arr[1].setAge(25);
-        arr[2].setAge(21);
-
-        arr[0].setFirstName("Max");
-        arr[1].setFirstName("Ivan");
-        arr[2].setFirstName("Kolya");
-
-        arr[0].setLastName("K");
-        arr[1].setLastName("B");
-        arr[2].setLastName("T");
-
-//        for (Person per: arr
-//             ) {
-//            System.out.println(per);
-//
-//        }
+        Figure [] arr = new Figure[3];
+        arr[0]=b;
+        arr[1]=p;
+        arr[2]=t;
 
 
 
-        FileOutputStream outputStream = new FileOutputStream("persons.ser");
+        FileOutputStream outputStream = new FileOutputStream("Figures.ser");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
         // сохраняем игру в файл
-        for (Person pr: arr
+        for (Figure f: arr
              ) {
-            objectOutputStream.writeObject(pr);
+            objectOutputStream.writeObject(f);
         }
 
 
@@ -65,20 +47,19 @@ public class Main {
 
 
 
-        FileInputStream fileInputStream = new FileInputStream("persons.ser");
+        FileInputStream fileInputStream = new FileInputStream("Figures.ser");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
-        Person [] arr1 = new Person[3];
+        System.out.println("Deserealized objects: ");
+        Figure [] arr1 = new Figure[3];
         int i=0;
-        try {
-            while(true) {
-                arr1[i] = (Person) objectInputStream.readObject();
-                System.out.println(arr1[i]);
-                i++;
-            }
-        }catch (EOFException e){
-            System.out.println("CATCHED: end of the file");
+        while(fileInputStream.available() >0){
+            arr1[i]=(Figure) objectInputStream.readObject();
+            arr1[i].info();
+            i+=1;
+
         }
+
         objectInputStream.close();
 
 

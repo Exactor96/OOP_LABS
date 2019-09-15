@@ -1,8 +1,10 @@
 package com.company;
 
+import java.io.Serializable;
+
 import static java.lang.Math.sqrt;
 
-public class Tetrahedron extends Figure{
+public class Tetrahedron extends Figure implements Serializable {
     private double a;
 
     Tetrahedron(){

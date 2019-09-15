@@ -1,6 +1,8 @@
 package com.company;
 
-public class Parallelepiped extends Figure{
+import java.io.Serializable;
+
+public class Parallelepiped extends Figure implements Serializable {
     private double a;
     private double b;
     private double c;
