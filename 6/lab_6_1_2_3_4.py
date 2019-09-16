@@ -59,7 +59,7 @@ class Time(Base):
 class Date(Base):
     month_n_day_list=[31,28,31,30,31,30,31,31,30,31,30,31]
     def validate(self):
-        if self.__year % 4 == 0:
+        if self.__years % 4 == 0:
             self.month_n_day_list[1] = 29
         else:
             self.month_n_day_list[1]=28
