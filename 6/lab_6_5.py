@@ -4,6 +4,7 @@ import random
 from lab_6_1_2_3_4 import Time
 if __name__ == '__main__':
     l=[]
+    print('Serealizing')
     for i in range(10):
         l.append(Time(random.randint(0, 59), random.randint(0, 59), random.randint(0, 100)))
         l[-1].Out()
@@ -19,7 +20,7 @@ if __name__ == '__main__':
     f.close()
 
     l=[]
-    print('\n'*5)
+    print('Deserealizing')
     f = open('many_time.ser', 'rb')
     try:
         while True:
